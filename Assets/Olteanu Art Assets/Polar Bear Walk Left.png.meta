@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2883bcd849359b4ba3a80d1f36fde70
-      internalID: 1778786038
+      spriteID: 130fba3bb8454d644b08ad4fa86adeed
+      internalID: 774934856
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f71b3763ab0a523478eda4606fe276f6
-      internalID: -1072776452
+      spriteID: 51a7883f58b361d4ca2db003cbf98cf8
+      internalID: 890072372
       vertices: []
       indices: 
       edges: []
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d79739e42998ca4ca7e8ceb3b0fd207
-      internalID: 1733411846
+      spriteID: b94ac58fc45867e4d8bdecbf817c5562
+      internalID: -1956395094
       vertices: []
       indices: 
       edges: []
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b842bd00306400048af699435dbe7d19
-      internalID: -1296520207
+      spriteID: c73f465726c376a48869355029582844
+      internalID: 20331988
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Polar Bear Walk Left_0: 1778786038
-      Polar Bear Walk Left_1: -1072776452
-      Polar Bear Walk Left_2: 1733411846
-      Polar Bear Walk Left_3: -1296520207
+      Polar Bear Walk Left_0: 774934856
+      Polar Bear Walk Left_1: 890072372
+      Polar Bear Walk Left_2: -1956395094
+      Polar Bear Walk Left_3: 20331988
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
