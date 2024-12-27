@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1.8f;
     private Vector2 movement;
 
     private Rigidbody2D rigidBody;
@@ -23,9 +23,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // Get input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement = movement.normalized;
+
+        // Update animator variable IsMoving
+        animator.SetBool("IsMoving", movement != Vector2.zero);
+        // Flip the sprite if moving left
+        if (movement.x != 0) spriteRenderer.flipX = movement.x > 0;
     }
 
     void FixedUpdate()
