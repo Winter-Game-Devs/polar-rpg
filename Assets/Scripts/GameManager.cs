@@ -14,25 +14,17 @@ public class GameManager : MonoBehaviour
         RetrieveMapHoles();
     }
 
-    void Update()
-    {
-        
-    }
-
     void OpenRandomHoles(int count)
     {
+        // Copy holes list to avoid modifying the original list
+        List<Hole> copyHoles = new List<Hole>(this.holes);
         for (int i = 0; i < count; i++) {
-            int randomIndex = Random.Range(0, holes.Count);
-
-            if (holes[randomIndex].isOpen)
-            {
-                // Try again
-                i--;
-            }
-            else
-            {
-                holes[randomIndex].OpenHole();
-            }
+            // Get random index
+            int randomIndex = Random.Range(0, copyHoles.Count);
+            // Open the hole
+            copyHoles[randomIndex].OpenHole();
+            // Remove the hole from the list
+            copyHoles.RemoveAt(randomIndex);
         }
     }
 
