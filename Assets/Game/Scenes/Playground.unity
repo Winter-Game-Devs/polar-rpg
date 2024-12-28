@@ -294,8 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0751fb5a273a5242a8f08b6afbfa47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.8
-  slideFriction: 0.4
+  moveSpeed: 1.25
+  slideFriction: 0.25
   inputInfluence: 1
   slide: 0
   fishCount: 0
@@ -1019,71 +1019,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1135394990
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3168924686130376408, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Size.x
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168924686130376408, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Size.y
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4851878601286034256, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Name
-      value: Fish (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.09321141
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.528539
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
 --- !u!1 &1387112352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3727,22 +3662,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3168924686130376408, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168924686130376408, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4851878601286034256, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
       propertyPath: m_Name
       value: Fish
       objectReference: {fileID: 0}
-    - target: {fileID: 5424868927635802134, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a6a7623c34db4c04380f167a680f162e, type: 3}
     - target: {fileID: 7285933095035511403, guid: 877799f7c18df5247b2d0e20ba6fe362, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3805,4 +3728,3 @@ SceneRoots:
   - {fileID: 1597506837}
   - {fileID: 5467538494623845054}
   - {fileID: 1994912568}
-  - {fileID: 1135394990}
