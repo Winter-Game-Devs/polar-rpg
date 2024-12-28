@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   speed:
-    value: 0
+    value: 1
   fishing:
     value: 0
   fishingChance:
-    value: 0
+    value: 50
   level:
-    value: 0
+    value: 1

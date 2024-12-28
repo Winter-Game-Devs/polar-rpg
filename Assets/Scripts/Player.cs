@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     // Event that tells the current number of fish caught
     public static event Action<int> OnNewFishCount;
 
+    public float moveSpeedOnIce = 0.3f;
+    public float moveSpeedOnSnow = 1.8f;
     public float moveSpeed = 1.8f;
     public float slideFriction = 0.4f; // How quickly the player slows down when sliding (0.95 = very slippery)
     public float inputInfluence = 1f; // How much input affects movement on ice
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour
     private Animator animator;
     public bool slide = false;
 
+    public PlayerStats playerStats;
+
     public int fishCount = 0;
 
     void Start()
@@ -28,6 +32,7 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        if (playerStats == null) Debug.LogError("PlayerStats scriptable object is missing");
         if (rigidBody == null) Debug.LogError("Rigidbody2D component is missing");
         if (spriteRenderer == null) Debug.LogError("SpriteRenderer component is missing");
         if (animator == null) Debug.LogError("Animator component is missing");
@@ -38,6 +43,7 @@ public class Player : MonoBehaviour
         // Get input
         if (!slide)
         {
+            moveSpeed = moveSpeedOnSnow;
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
             movement = movement.normalized;
@@ -45,6 +51,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            moveSpeed = moveSpeedOnIce;
             movement.x = Input.GetAxis("Horizontal");
             movement.y = Input.GetAxis("Vertical"); 
             velocity += movement * moveSpeed * inputInfluence;
@@ -75,5 +82,15 @@ public class Player : MonoBehaviour
         fishCount += numberOfFishCatched;
         OnFishCatched?.Invoke(numberOfFishCatched);
         OnNewFishCount?.Invoke(fishCount);
+    }
+
+    public float GetLevel()
+    {
+        return playerStats.level.GetValue();
+    }
+
+    public float GetSpeed()
+    {
+        return playerStats.speed.GetValue() * moveSpeed;
     }
 }
