@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI fishCountText;
     public TextMeshProUGUI levelText;
-    public TextMeshProUGUI moveSpeedText;
+    public TextMeshProUGUI moveSpeedOnSnowText, moveSpeedOnIceText;
     public GameObject inventoryPanel;
     public GameObject statsPanel;
     public Player player;
@@ -20,7 +20,8 @@ public class UIManager : MonoBehaviour
         Player.OnNewFishCount += UpdateFishCountUI;
         if (fishCountText == null) Debug.LogError("FishCountText is missing");
         if (levelText == null) Debug.LogError("LevelText is missing");
-        if (moveSpeedText == null) Debug.LogError("MoveSpeedText is missing");
+        if (moveSpeedOnSnowText == null) Debug.LogError("MoveSpeedOnSnowText is missing");
+        if (moveSpeedOnIceText == null) Debug.LogError("MoveSpeedOnIceText is missing");
     }
 
     private void UpdateFishCountUI(int fishCount)
@@ -42,7 +43,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateSpeedUI()
     {
-        moveSpeedText.SetText(player.GetSpeed().ToString());
+        moveSpeedOnSnowText.SetText(player.moveSpeedOnSnow.ToString());
+        moveSpeedOnIceText.SetText(player.moveSpeedOnIce.ToString());
     }
 
     public void ToggleInventoryPanel()
