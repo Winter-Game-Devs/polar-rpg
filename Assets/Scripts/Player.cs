@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Event when the bear caught a fish
+    public static event Action<int> OnFishCatched;
+    // Event that tells the current number of fish caught
+    public static event Action<int> OnNewFishCount;
+
     public float moveSpeed = 1.8f;
     public float slideFriction = 0.4f; // How quickly the player slows down when sliding (0.95 = very slippery)
     public float inputInfluence = 1f; // How much input affects movement on ice
@@ -14,6 +20,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     public bool slide = false;
+
+    public int fishCount = 0;
 
     void Start()
     {
@@ -60,5 +68,12 @@ public class Player : MonoBehaviour
 
         // Move the player
         rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
+    }
+
+    public void FishCatched(int numberOfFishCatched = 1)
+    {
+        fishCount += numberOfFishCatched;
+        OnFishCatched?.Invoke(numberOfFishCatched);
+        OnNewFishCount?.Invoke(fishCount);
     }
 }
