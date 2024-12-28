@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1830520ace39a6843aa22e570c324ff3
-      internalID: 1491448118
+      spriteID: 34259945eaade1840b7ecfbf1de8dd78
+      internalID: -558708848
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec01399e845496e4095c79157b4fea7c
-      internalID: -142761591
+      spriteID: 8b87690bd63354d469385d817064bae1
+      internalID: -570683396
       vertices: []
       indices: 
       edges: []
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d83ad704e9e47b46a7fe8254652bd91
-      internalID: -1123542101
+      spriteID: dff352832de5796488ac7b1cbe77c5c5
+      internalID: -163093712
       vertices: []
       indices: 
       edges: []
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b38a2538a029b7b46ac37f596e383ce3
-      internalID: 1946697869
+      spriteID: cef378ca9bf393740b5e6e7e09f9e2f5
+      internalID: 1389686509
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dig animation_0: 1491448118
-      Dig animation_1: -142761591
-      Dig animation_2: -1123542101
-      Dig animation_3: 1946697869
+      Dig animation_0: -558708848
+      Dig animation_1: -570683396
+      Dig animation_2: -163093712
+      Dig animation_3: 1389686509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
