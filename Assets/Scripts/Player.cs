@@ -53,8 +53,12 @@ public class Player : MonoBehaviour
         {
             moveSpeed = moveSpeedOnIce;
             movement.x = Input.GetAxis("Horizontal");
-            movement.y = Input.GetAxis("Vertical"); 
+            movement.y = Input.GetAxis("Vertical");
+            movement = movement.normalized; // Ensure consistent input direction
             velocity += movement * moveSpeed * inputInfluence;
+
+            // Clamp velocity to a maximum speed
+            velocity = Vector2.ClampMagnitude(velocity, moveSpeedOnIce * 2f);
         }
         // Update animator variable IsMoving
         animator.SetBool("IsMoving", movement != Vector2.zero);
