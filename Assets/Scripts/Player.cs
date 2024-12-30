@@ -20,12 +20,20 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
-    private Animator animator;
-    public bool slide = false;
+    public Animator animator;
+    public bool slide = false, canMove = true;
 
     public PlayerStats playerStats;
 
     public int fishCount = 0;
+
+    [Header("Fishing Tools")]
+    [SerializeField] Transform castPoint;
+    [SerializeField] float fishDistance, digMovePositionSpeed; // this is speed to move to hole position
+    public bool fishDetector, isFacingLeft, isDiggingHole; //i build a hole detector, we might not needed. But is here for now. I made something much simple.
+    public Transform digPosition;
+    public GameObject hole;
+    public bool makingHole;
 
     void Start()
     {
@@ -40,30 +48,83 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Get input
-        if (!slide)
+        if (canMove)
         {
-            moveSpeed = moveSpeedOnSnow;
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-            movement = movement.normalized;
-            velocity = movement * moveSpeed; // Direct movement when not sliding
-        }
-        else
-        {
-            moveSpeed = moveSpeedOnIce;
-            movement.x = Input.GetAxis("Horizontal");
-            movement.y = Input.GetAxis("Vertical");
-            movement = movement.normalized; // Ensure consistent input direction
-            velocity += movement * moveSpeed * inputInfluence;
+            // Get input
+            if (!slide)
+            {
+                moveSpeed = moveSpeedOnSnow;
+                movement.x = Input.GetAxisRaw("Horizontal");
+                movement.y = Input.GetAxisRaw("Vertical");
+                movement = movement.normalized;
+                velocity = movement * moveSpeed; // Direct movement when not sliding
+                if (spriteRenderer.flipX)
+                {
+                    isFacingLeft = false;
+                }
+                else
+                {
+                    isFacingLeft = true;
+                }
+            }
+            else
+            {
+                moveSpeed = moveSpeedOnIce;
+                movement.x = Input.GetAxis("Horizontal");
+                movement.y = Input.GetAxis("Vertical");
+                movement = movement.normalized; // Ensure consistent input direction
+                velocity += movement * moveSpeed * inputInfluence;
 
-            // Clamp velocity to a maximum speed
-            velocity = Vector2.ClampMagnitude(velocity, moveSpeedOnIce * 2f);
+                // Clamp velocity to a maximum speed
+                velocity = Vector2.ClampMagnitude(velocity, moveSpeedOnIce * 2f);
+
+                if (spriteRenderer.flipX)
+                {
+                    isFacingLeft = false;
+                }
+                else
+                {
+                    isFacingLeft = true;
+                }
+            }
+            // Update animator variable IsMoving
+            animator.SetBool("IsMoving", movement != Vector2.zero);
+            // Flip the sprite if moving left
+            if (movement.x != 0) spriteRenderer.flipX = movement.x > 0;
+            if (FishDetector(fishDistance))
+            {
+                Debug.Log("you find a hole");
+                //isFacingLeft = true;
+            }
+            else
+            {
+                Debug.Log("you find nothing");
+                //isFacingLeft = false;
+            }
         }
-        // Update animator variable IsMoving
-        animator.SetBool("IsMoving", movement != Vector2.zero);
-        // Flip the sprite if moving left
-        if (movement.x != 0) spriteRenderer.flipX = movement.x > 0;
+
+        if(isDiggingHole)
+        {
+            if (transform.position.x < digPosition.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
+            transform.position = Vector3.MoveTowards(transform.position,digPosition.position, digMovePositionSpeed * Time.deltaTime);
+            animator.SetBool("IsMoving", true);
+            if (Vector3.Distance(transform.position,digPosition.position) < 0.01f)
+            {
+                spriteRenderer.flipX = false;
+                isDiggingHole = false; // Switch direction
+                canMove = true;
+                makingHole = true;
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("isDigging", true);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -97,4 +158,36 @@ public class Player : MonoBehaviour
     {
         return playerStats.speed.GetValue() * moveSpeed;
     }
+    
+    bool FishDetector(float distance)
+    {        
+        var castDistance = distance;
+        if (isFacingLeft)
+        {
+            castDistance = -distance;
+        }
+        Vector2 endPos = castPoint.position + Vector3.right * castDistance;
+        RaycastHit2D hit = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Fishing"));
+
+        if(hit.collider !=  null)
+        {
+            if(hit.collider.gameObject.CompareTag("Hole"))
+            {
+                fishDetector = true;
+            }
+            else
+            {
+                fishDetector = false;
+            }
+
+            Debug.DrawLine(castPoint.position, endPos, Color.red);
+        }
+        else
+        {
+            Debug.DrawLine(castPoint.position, endPos, Color.green);
+        }
+
+        return fishDetector;
+    }
+    
 }
