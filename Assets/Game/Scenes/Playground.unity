@@ -46001,6 +46001,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4399456493426261926, guid: 21c2a2c9ac30e40909bb3407e3031a01, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399456493426261926, guid: 21c2a2c9ac30e40909bb3407e3031a01, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5366557789021842072, guid: 21c2a2c9ac30e40909bb3407e3031a01, type: 3}
       propertyPath: m_Name
       value: Villain
@@ -46886,6 +46894,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1698584561313201360, guid: 726b410ac89334af6a267775321cbde2, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698584561313201360, guid: 726b410ac89334af6a267775321cbde2, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5327369101169849070, guid: 726b410ac89334af6a267775321cbde2, type: 3}
       propertyPath: m_Name
       value: Igloo
