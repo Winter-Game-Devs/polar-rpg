@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class UIManager : MonoBehaviour
     public GameObject statsPanel;
     public Player player;
 
+    [Header("Fishing Tools")]
+    public Image dig;
+    public Image fish;
+    public Button digButton, fishButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +28,10 @@ public class UIManager : MonoBehaviour
         if (levelText == null) Debug.LogError("LevelText is missing");
         if (moveSpeedOnSnowText == null) Debug.LogError("MoveSpeedOnSnowText is missing");
         if (moveSpeedOnIceText == null) Debug.LogError("MoveSpeedOnIceText is missing");
+        if (dig == null) Debug.LogError("dig is missing");
+        if (fish == null) Debug.LogError("fish is missing");
+        if (fishButton == null) Debug.LogError("fishButton is missing");
+        if (digButton == null) Debug.LogError("DigButton is missing");
     }
 
     private void UpdateFishCountUI(int fishCount)
@@ -57,5 +67,13 @@ public class UIManager : MonoBehaviour
     {
         inventoryPanel.SetActive(false);
         statsPanel.SetActive(true);
+    }
+    
+    public void DigTheHole()
+    {
+        dig.color = Color.red;
+        //fish.color = Color.green;
+        player.canMove = false;
+        player.isDiggingHole = true;
     }
 }
