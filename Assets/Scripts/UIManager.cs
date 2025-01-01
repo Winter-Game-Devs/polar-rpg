@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
         if (fish == null) Debug.LogError("fish is missing");
         if (fishButton == null) Debug.LogError("fishButton is missing");
         if (digButton == null) Debug.LogError("DigButton is missing");
+        FindObjectOfType<HoleSpawner>().SpawnObjectAtRandomPosition();
     }
 
     private void UpdateFishCountUI(int fishCount)
@@ -75,5 +76,34 @@ public class UIManager : MonoBehaviour
         //fish.color = Color.green;
         player.canMove = false;
         player.isDiggingHole = true;
+        digButton.interactable = false;
+    }
+
+    public void Fishing()
+    {
+        fish.color = Color.red;
+        //fish.color = Color.green;
+        player.canMove = false;
+        player.isFishing = true;
+        fishButton.interactable = false;
+        StartCoroutine(SpawnFishCo());
+    }
+
+    IEnumerator SpawnFishCo()
+    {
+        float waitingTime = UnityEngine.Random.Range(2f, 3f);
+        yield return new WaitForSeconds(waitingTime);
+        if (player.isFishing)
+        {
+            player.SpawnAFish();
+        }
+        player.isFishing = false;
+        player.canMove = true;
+        player.animator.SetBool("isFishing", false);
+        if (player.digPosition != null)
+        {
+            fishButton.interactable = true;
+            fish.color = Color.green;
+        }
     }
 }
