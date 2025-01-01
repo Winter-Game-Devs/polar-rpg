@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -30,10 +28,11 @@ public class Player : MonoBehaviour
     [Header("Fishing Tools")]
     [SerializeField] Transform castPoint;
     [SerializeField] float fishDistance, digMovePositionSpeed; // this is speed to move to hole position
-    public bool fishDetector, isFacingLeft, isDiggingHole; //i build a hole detector, we might not needed. But is here for now. I made something much simple.
-    public Transform digPosition;
+    public bool fishDetector, isFacingLeft, isDiggingHole, isFishing; //i build a hole detector, we might not needed. But is here for now. I made something much simple.
+    public Transform digPosition, spawnFishPosition;
     public GameObject hole;
-    public bool makingHole;
+    public bool makingHole, fishing;
+    public GameObject theFish;
 
     void Start()
     {
@@ -44,6 +43,8 @@ public class Player : MonoBehaviour
         if (rigidBody == null) Debug.LogError("Rigidbody2D component is missing");
         if (spriteRenderer == null) Debug.LogError("SpriteRenderer component is missing");
         if (animator == null) Debug.LogError("Animator component is missing");
+        if (spawnFishPosition == null) Debug.LogError("spawnFishPosition is missing");
+        if (theFish == null) Debug.LogError("theFish is missing");
     }
 
     void Update()
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
             animator.SetBool("IsMoving", movement != Vector2.zero);
             // Flip the sprite if moving left
             if (movement.x != 0) spriteRenderer.flipX = movement.x > 0;
+
             if (FishDetector(fishDistance))
             {
                 Debug.Log("you find a hole");
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(isDiggingHole)
+        if (isDiggingHole)
         {
             if (transform.position.x < digPosition.position.x)
             {
@@ -113,20 +115,40 @@ public class Player : MonoBehaviour
             {
                 spriteRenderer.flipX = false;
             }
-            transform.position = Vector3.MoveTowards(transform.position,digPosition.position, digMovePositionSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, digPosition.position, digMovePositionSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
-            if (Vector3.Distance(transform.position,digPosition.position) < 0.01f)
+            if (Vector3.Distance(transform.position, digPosition.position) < 0.01f)
             {
                 spriteRenderer.flipX = false;
                 isDiggingHole = false; // Switch direction
-                canMove = true;
                 makingHole = true;
                 animator.SetBool("IsMoving", false);
                 animator.SetBool("isDigging", true);
             }
         }
-    }
 
+        if (isFishing)
+        {
+            if (transform.position.x < digPosition.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, digPosition.position, digMovePositionSpeed * Time.deltaTime);
+            animator.SetBool("IsMoving", true);
+            if (Vector3.Distance(transform.position, digPosition.position) < 0.01f)
+            {
+                spriteRenderer.flipX = false;
+                isDiggingHole = false; // Switch direction
+                fishing = true;
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("isFishing", true);
+            }
+        }
+    }
     void FixedUpdate()
     {
         if (slide)
@@ -188,6 +210,24 @@ public class Player : MonoBehaviour
         }
 
         return fishDetector;
+    }
+
+    public void StopFishingOrDigging()
+    {
+        canMove = true;
+        fishing = false;
+    }
+
+    public void SpawnAFish()
+    {
+        float randomX = UnityEngine.Random.Range(-0.5f, -1f);
+        float randomY = UnityEngine.Random.Range(-1f, 1f);
+
+        Vector3 spawnPosition = new Vector3(spawnFishPosition.position.x + randomX, spawnFishPosition.position.y + randomY, spawnFishPosition.position.z);
+
+        // Instantiate the GameObject
+        Instantiate(theFish, spawnPosition, Quaternion.identity);
+        //StopFishing();
     }
     
 }
