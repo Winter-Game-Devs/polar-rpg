@@ -4,28 +4,41 @@ using UnityEngine;
 
 public class Igloo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Just running code");
-        
+    public int inventory;
+
+    public int Inventory {
+        get {return inventory;}
+        private set {inventory=value;}
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetInventory(int value) {
+        inventory = value;
     }
+
+    public bool isBeingRobbed = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player found the house");
+            inventory += other.GetComponent<Player>().FishDelivered();
+
+            if (inventory >= 100) EndGame();
         }
+
+        if (other.CompareTag("Villain"))
+        {
+            isBeingRobbed = true;
+
+            if (inventory >= 100) EndGame();
+        }
+        
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other) {isBeingRobbed = false;}
+
+    private void EndGame()
     {
     }
 }
