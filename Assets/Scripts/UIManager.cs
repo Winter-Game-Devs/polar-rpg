@@ -8,12 +8,17 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI fishCountText;
+    public TextMeshProUGUI fishCountText, totalCountText;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI gameStartCountdownText;
     public TextMeshProUGUI moveSpeedOnSnowText, moveSpeedOnIceText;
     public GameObject inventoryPanel;
+    public GameObject countdownUI;
+    public GameObject gameOverUI;
     public GameObject statsPanel;
     public Player player;
+
+    public Igloo igloo;
 
     [Header("Fishing Tools")]
     public Image dig;
@@ -22,8 +27,10 @@ public class UIManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        totalCountText.SetText(igloo.inventory.ToString());
         Player.OnNewFishCount += UpdateFishCountUI;
+        Player.OnNewDeliveryCount += UpdateTotalCountUI;
         if (fishCountText == null) Debug.LogError("FishCountText is missing");
         if (levelText == null) Debug.LogError("LevelText is missing");
         if (moveSpeedOnSnowText == null) Debug.LogError("MoveSpeedOnSnowText is missing");
@@ -33,7 +40,34 @@ public class UIManager : MonoBehaviour
         if (fishButton == null) Debug.LogError("fishButton is missing");
         if (digButton == null) Debug.LogError("DigButton is missing");
         FindObjectOfType<HoleSpawner>().SpawnObjectAtRandomPosition();
+
+        PlutoGameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+        HideCountdownUI();
     }
+
+    private void GameManager_OnStateChanged(object sender, System.EventArgs e) {
+       if (PlutoGameManager.Instance.IsCountdownToStart()) ShowCountdownUI();
+       else HideCountdownUI();
+       if (PlutoGameManager.Instance.IsGameOver()) ShowGameOverUI();
+       
+    }
+
+    private void ShowCountdownUI() {
+        countdownUI.SetActive(true);
+    }
+
+    private void ShowGameOverUI() {
+        gameOverUI.SetActive(true);
+    }
+
+    private void HideGameOverUI() {
+        gameOverUI.SetActive(true);
+    }
+
+    private void HideCountdownUI() {
+        countdownUI.SetActive(false);
+    }
+
 
     private void UpdateFishCountUI(int fishCount)
     {
@@ -41,10 +75,19 @@ public class UIManager : MonoBehaviour
             fishCountText.SetText(fishCount.ToString());
     }
 
+    private void UpdateTotalCountUI(int fishDelivered)
+    {
+        String totalText = (igloo.inventory + fishDelivered).ToString();
+        if (totalCountText)
+            totalCountText.SetText(totalText);
+    }
+
     public void Update()
     {
+        totalCountText.SetText(igloo.inventory.ToString());
         UpdateLevelUI();
         UpdateSpeedUI();
+        gameStartCountdownText.text = Mathf.Ceil(PlutoGameManager.Instance.GetCountdownToStartTimer()).ToString();
     }
 
     public void UpdateLevelUI()

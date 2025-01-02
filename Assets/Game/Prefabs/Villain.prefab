@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2971476295172253143}
   m_Layer: 0
   m_Name: Villain
-  m_TagString: Untagged
+  m_TagString: Villain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   changeDirectionInterval: 2
+  target: {fileID: 6258532630018808203, guid: 726b410ac89334af6a267775321cbde2, type: 3}
   villainCounter: 2
   VillainPrototype: {fileID: 5366557789021842072}
 --- !u!50 &4399456493426261926

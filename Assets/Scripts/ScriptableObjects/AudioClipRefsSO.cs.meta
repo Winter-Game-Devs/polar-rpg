@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad7b122ed932e42e48b64f9daea128fc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - moving: {fileID: 8300000, guid: e28c1c26bad84429aa99a71f4304ef1b, type: 3}
+  - digging: {fileID: 8300000, guid: 4238da913940d485c80937edc6bd549e, type: 3}
+  - fishing: {fileID: 8300000, guid: 7f5b4613794d347b9b50e7877d033dcf, type: 3}
+  - thiefing: {fileID: 8300000, guid: b30110e6eb4da4d11976f70b6f0f4328, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

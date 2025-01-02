@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7b122ed932e42e48b64f9daea128fc, type: 3}
+  m_Name: AudioClipsRefsSO
+  m_EditorClassIdentifier: 
+  moving: {fileID: 8300000, guid: e28c1c26bad84429aa99a71f4304ef1b, type: 3}
+  digging: {fileID: 8300000, guid: 4238da913940d485c80937edc6bd549e, type: 3}
+  fishing: {fileID: 8300000, guid: 7f5b4613794d347b9b50e7877d033dcf, type: 3}
+  thiefing: {fileID: 8300000, guid: b30110e6eb4da4d11976f70b6f0f4328, type: 3}

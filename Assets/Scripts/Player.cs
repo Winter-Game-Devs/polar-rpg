@@ -5,8 +5,10 @@ public class Player : MonoBehaviour
 {
     // Event when the bear caught a fish
     public static event Action<int> OnFishCatched;
+    public static event Action<int> OnFishDelivered;
     // Event that tells the current number of fish caught
     public static event Action<int> OnNewFishCount;
+    public static event Action<int> OnNewDeliveryCount;
 
     public float moveSpeedOnIce = 0.3f;
     public float moveSpeedOnSnow = 1.8f;
@@ -34,6 +36,9 @@ public class Player : MonoBehaviour
     public bool makingHole, fishing;
     public GameObject theFish;
 
+    public event EventHandler OnMovementStart;
+    public event EventHandler OnMovementEnd;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!PlutoGameManager.Instance.IsGamePlaying()) return;
         if (canMove)
         {
             // Get input
@@ -90,6 +96,8 @@ public class Player : MonoBehaviour
             }
             // Update animator variable IsMoving
             animator.SetBool("IsMoving", movement != Vector2.zero);
+            if (movement != Vector2.zero) OnMovementStart?.Invoke(this, EventArgs.Empty);
+            else OnMovementEnd?.Invoke(this, EventArgs.Empty);
             // Flip the sprite if moving left
             if (movement.x != 0) spriteRenderer.flipX = movement.x > 0;
 
@@ -117,6 +125,7 @@ public class Player : MonoBehaviour
             }
             transform.position = Vector3.MoveTowards(transform.position, digPosition.position, digMovePositionSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
+            OnMovementStart?.Invoke(this, EventArgs.Empty);
             if (Vector3.Distance(transform.position, digPosition.position) < 0.01f)
             {
                 spriteRenderer.flipX = false;
@@ -139,6 +148,7 @@ public class Player : MonoBehaviour
             }
             transform.position = Vector3.MoveTowards(transform.position, digPosition.position, digMovePositionSpeed * Time.deltaTime);
             animator.SetBool("IsMoving", true);
+            OnMovementStart?.Invoke(this, EventArgs.Empty);
             if (Vector3.Distance(transform.position, digPosition.position) < 0.01f)
             {
                 spriteRenderer.flipX = false;
@@ -169,6 +179,16 @@ public class Player : MonoBehaviour
         fishCount += numberOfFishCatched;
         OnFishCatched?.Invoke(numberOfFishCatched);
         OnNewFishCount?.Invoke(fishCount);
+    }
+
+    public int FishDelivered()
+    {
+        int fishDelivered = fishCount;
+        fishCount = 0;
+        OnFishDelivered?.Invoke(fishDelivered);
+        OnNewDeliveryCount?.Invoke(fishDelivered);
+        OnNewFishCount?.Invoke(fishCount);
+        return fishDelivered;
     }
 
     public float GetLevel()
